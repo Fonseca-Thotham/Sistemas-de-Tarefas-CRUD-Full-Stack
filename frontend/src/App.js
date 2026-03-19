@@ -43,6 +43,7 @@ function App() {
       </button>
     </div>
 
+    {tarefas.length === 0 && <p>Nenhuma tarefa adicionada</p>} 
     <ul>
       {tarefas.map((t) => (
         <li key={t.id}>
