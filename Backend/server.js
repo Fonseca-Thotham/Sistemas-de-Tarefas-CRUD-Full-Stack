@@ -34,3 +34,9 @@ app.post('/tarefas', (req, res) => {
 
 // Aqui recebemos dados do frontend, cria nova tarefa e/ou salva
 
+app.delete('/tarefas/:id', (req, res) => {
+  tarefas = tarefas.filter(t => t.id != req.params.id);
+  res.sendStatus(204);
+});
+
+// Remove tarefas pelo ID
