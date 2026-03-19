@@ -40,3 +40,7 @@ app.delete('/tarefas/:id', (req, res) => {
 });
 
 // Remove tarefas pelo ID
+
+app.listen(3001, () => {
+  console.log('Servidor rodando na porta 3001');
+});
