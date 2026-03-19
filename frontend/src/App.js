@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import './App.css'
 
 function App() {
   const [tarefas, setTarefas] = useState([]);
@@ -28,27 +29,35 @@ function App() {
   };
 
   return (
-    <div style={{ padding: '20px' }}>
-      <h1>Lista de Tarefas</h1>
+  <div className="container">
+    <h1>Lista de Tarefas</h1>
 
+    <div className="input-group">
       <input
         value={titulo}
         onChange={(e) => setTitulo(e.target.value)}
         placeholder="Digite uma tarefa"
       />
-
-      <button onClick={adicionar}>Adicionar</button>
-
-      <ul>
-        {tarefas.map((t) => (
-          <li key={t.id}>
-            {t.titulo}
-            <button onClick={() => deletar(t.id)}>Excluir</button>
-          </li>
-        ))}
-      </ul>
+      <button className="add-btn" onClick={adicionar}>
+        Adicionar
+      </button>
     </div>
-  );
+
+    <ul>
+      {tarefas.map((t) => (
+        <li key={t.id}>
+          {t.titulo}
+          <button
+            className="delete-btn"
+            onClick={() => deletar(t.id)}
+          >
+            Excluir
+          </button>
+        </li>
+      ))}
+    </ul>
+  </div>
+);
 }
 
 //useState: Guarda os dados da tela
