@@ -15,3 +15,7 @@ let id = 1;
 
 //tarefas → lista de dados
 //id → identificador único
+
+app.get('/tarefas', (req, res) => {
+  res.json(tarefas);
+});
