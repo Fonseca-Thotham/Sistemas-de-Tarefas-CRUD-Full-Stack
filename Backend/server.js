@@ -44,3 +44,17 @@ app.delete('/tarefas/:id', (req, res) => {
 app.listen(3001, () => {
   console.log('Servidor rodando na porta 3001');
 });
+
+app.put('/tarefas/:id', (req, res) => {
+  const tarefa = tarefas.find(t => t.id == req.params.id);
+
+  if (!tarefa) {
+    return res.status(404).json({ erro: 'Tarefa não encontrada' });
+  }
+
+  tarefa.titulo = req.body.titulo;
+
+  res.json(tarefa);
+});
+
+//procura tarefa pelo ID, altera o título e retorna o resultado
