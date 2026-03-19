@@ -6,16 +6,31 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-//require() → importa bibliotecas
-//express() → cria o servidor
-//app.use() → configura comportamentos
+//require(): importa bibliotecas
+//express(): cria o servidor
+//app.use(): configura comportamentos
 
 let tarefas = [];
 let id = 1;
 
-//tarefas → lista de dados
-//id → identificador único
+//tarefas: lista de dados
+//id: identificador único
 
 app.get('/tarefas', (req, res) => {
   res.json(tarefas);
 });
+
+//Quando alguem acessar o caminho, responde com os dados
+
+app.post('/tarefas', (req, res) => {
+  const nova = {
+    id: id++,
+    titulo: req.body.titulo
+  };
+
+  tarefas.push(nova);
+  res.json(nova);
+});
+
+// Aqui recebemos dados do frontend, cria nova tarefa e/ou salva
+
