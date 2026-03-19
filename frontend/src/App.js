@@ -5,6 +5,8 @@ import './App.css'
 function App() {
   const [tarefas, setTarefas] = useState([]);
   const [titulo, setTitulo] = useState('');
+  const [editandoId, setEditandoId] = useState(null);
+  const [novoTitulo, setNovoTitulo] = useState('');
 
   const api = 'http://localhost:3001/tarefas';
 
@@ -28,6 +30,16 @@ function App() {
     carregar();
   };
 
+  const editar = async (id) => {
+  if (!novoTitulo.trim()) return;
+
+  await axios.put(`${api}/${id}`, { titulo: novoTitulo });
+
+  setEditandoId(null);
+  setNovoTitulo('');
+  carregar();
+};
+
   return (
   <div className="container">
     <h1>Lista de Tarefas</h1>
@@ -47,13 +59,33 @@ function App() {
     <ul>
       {tarefas.map((t) => (
         <li key={t.id}>
-          {t.titulo}
-          <button
-            className="delete-btn"
-            onClick={() => deletar(t.id)}
-          >
-            Excluir
-          </button>
+          {editandoId === t.id ? (
+    <>
+      <input
+        value={novoTitulo}
+        onChange={(e) => setNovoTitulo(e.target.value)}
+      />
+      <button onClick={() => editar(t.id)}>Salvar</button>
+    </>
+  ) : (
+    <>
+      {t.titulo}
+
+      <button onClick={() => {
+        setEditandoId(t.id);
+        setNovoTitulo(t.titulo);
+      }}>
+        ✏️
+      </button>
+
+      <button
+        className="delete-btn"
+        onClick={() => deletar(t.id)}
+      >
+        🗑️
+      </button>
+    </>
+  )}
         </li>
       ))}
     </ul>
