@@ -8,7 +8,7 @@ function App() {
   const [editandoId, setEditandoId] = useState(null);
   const [novoTitulo, setNovoTitulo] = useState('');
 
-  const api = 'http://localhost:3001/tarefas';
+  const api = `${process.env.REACT_APP_API_URL || 'http://localhost:3001'}/tarefas`;;
 
   useEffect(() => {
     carregar();
