@@ -16,6 +16,14 @@ let id = 1;
 //tarefas: lista de dados
 //id: identificador único
 
+app.get('/', (req, res) => {
+  res.send('API do Sistema de Tarefas online 🚀');
+});
+
+app.get('/health', (req, res) => {
+  res.status(200).json({ status: 'ok' });
+});
+
 app.get('/tarefas', (req, res) => {
   res.json(tarefas);
 });
