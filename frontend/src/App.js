@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import axios from 'axios';
 import './App.css'
 
@@ -10,14 +10,14 @@ function App() {
 
   const api = `${process.env.REACT_APP_API_URL || 'http://localhost:3001'}/tarefas`;;
 
-  useEffect(() => {
-    carregar();
-  }, []);
+  const carregar = useCallback(() => {
+  axios.get(api)
+    .then(res => setTarefas(res.data));
+}, [api]);
 
-  const carregar = async () => {
-    const res = await axios.get(api);
-    setTarefas(res.data);
-  };
+  useEffect(() => {
+  carregar();
+}, [carregar]);
 
   const adicionar = async () => {
     await axios.post(api, { titulo });
